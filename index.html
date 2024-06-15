@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirection aléatoire</title>
+    <script>
+        let urls = [];
+
+        function generateRandomUrls(count) {
+            const baseUrls = [
+                "https://www.google.com",
+                "https://www.wikipedia.org",
+                "https://www.youtube.com",
+                "https://www.reddit.com",
+                "https://www.twitter.com",
+                "https://www.facebook.com",
+                "https://www.amazon.com",
+                "https://www.netflix.com",
+                "https://www.github.com",
+                "https://www.stackoverflow.com",
+                "https://www.nytimes.com",
+                "https://www.bbc.com",
+                "https://www.spotify.com",
+                "https://www.apple.com",
+                "https://www.microsoft.com",
+                "https://www.instagram.com",
+                "https://www.linkedin.com",
+                "https://www.pinterest.com",
+                "https://www.aliexpress.com",
+                "https://www.tumblr.com",
+                "https://www.ebay.com",
+                "https://www.cnn.com",
+                "https://www.espn.com",
+                "https://www.nationalgeographic.com",
+                "https://www.weather.com"
+            ];
+
+            for (let i = 0; i < count; i++) {
+                const randomBaseUrl = baseUrls[Math.floor(Math.random() * baseUrls.length)];
+                urls.push(randomBaseUrl);
+            }
+        }
+
+        function openRandomUrls(count) {
+            if (urls.length === 0) {
+                generateRandomUrls(100); // Générer 100 URLs aléatoires
+            }
+            for (let i = 0; i < count; i++) {
+                const newUrl = urls.pop();
+                window.open(newUrl, '_blank');
+            }
+        }
+
+        function updateButtonUrl() {
+            const button = document.getElementById("randomButton");
+            button.onclick = function() {
+                const numberOfPages = parseInt(prompt("Entrez le nombre de pages à ouvrir:", "5"));
+                if (!isNaN(numberOfPages) && numberOfPages > 0) {
+                    openRandomUrls(numberOfPages);
+                } else {
+                    alert("Veuillez entrer un nombre valide supérieur à zéro.");
+                }
+            };
+        }
+
+        setInterval(updateButtonUrl, 500);
+    </script>
+</head>
+<body>
+    <button id="randomButton">Cliquez ici pour ouvrir des pages aléatoires</button>
+</body>
+</html>
